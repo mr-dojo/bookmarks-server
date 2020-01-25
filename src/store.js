@@ -1,4 +1,4 @@
-[
+const bookmarks = [
   {
     "id": "1",
     "title": "Test Title 1",
@@ -21,3 +21,5 @@
     "description": "This is a string describing test title 3"
   }
 ]
+
+module.exports = bookmarks;

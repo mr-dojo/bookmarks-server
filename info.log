@@ -3,3 +3,39 @@
 {"message":"Unauthorized request to path: /","level":"error"}
 {"message":"Unauthorized request to path: /bookmarks/2","level":"error"}
 {"message":"Unauthorized request to path: /bookmarks/2","level":"error"}
+{"message":"rating must be a number","level":"error"}
+{"message":"rating must be a number","level":"error"}
+{"message":"Bookmark with id b402b26b-b7ea-4f3a-8f6e-8632b378438b created","level":"info"}
+{"message":"rating must be between 1 and 5","level":"error"}
+{"message":"Bookmark with id cc549bba-b9b6-4d25-9efe-212f3b3093f0 created","level":"info"}
+{"message":"rating must be between 1 and 5","level":"error"}
+{"message":"Bookmark with id a477b10b-8a03-4ce0-83c9-4c6609c00ee1 created","level":"info"}
+{"message":"Bookmark with id 46b11838-bd94-45e7-b6c3-d8f8a085fdd2 created","level":"info"}
+{"message":"Bookmark with id 41ea9f2f-f385-4035-8f16-26f5c05f8aff created","level":"info"}
+{"message":"url must be a string","level":"error"}
+{"message":"Bookmark with id 524a2e6a-0f86-4a4d-b370-6621862b644a created","level":"info"}
+{"message":"title must be a string","level":"error"}
+{"message":"Bookmark with id 2abaf9ff-86bc-49c9-abcb-473f2a4da438 created","level":"info"}
+{"message":"url must look like \"http://example.com\"","level":"error"}
+{"message":"Bookmark with id 576add5b-2015-410d-b74a-1c9f26b9fd33 created","level":"info"}
+{"message":"Bookmark with id dc438f77-fa09-48b4-8887-dfc6bf68c2c8 created","level":"info"}
+{"message":"Bookmark with id 6953b1cf-a2af-4066-97f2-ed327ee45b77 created","level":"info"}
+{"message":"Bookmark with id 89fe5f61-78b1-4bc0-8a50-ddf5be3e30de created","level":"info"}
+{"message":"Bookmark with id 0d411aea-56ef-46d6-b47d-55d3583e2ba8 created","level":"info"}
+{"message":"Bookmark with id 15156ce8-3abf-406e-9642-bfb6c18ed9e8 created","level":"info"}
+{"message":"Bookmark with id af84a32a-04b0-471a-b6b0-7c4cedf54672 created","level":"info"}
+{"message":"url must look like \"http://example.com\"","level":"error"}
+{"message":"url must look like \"http://example.com\"","level":"error"}
+{"message":"url must look like \"http://example.com\"","level":"error"}
+{"message":"url must look like \"http://example.com\"","level":"error"}
+{"message":"url must look like \"http://example.com\"","level":"error"}
+{"message":"Bookmark with id fa8d3cc7-6a89-4e73-9aab-94ec1c6ab373 created","level":"info"}
+{"message":"url must look like \"http://example.com\"","level":"error"}
+{"message":"Bookmark with id 18e3b900-f9cd-4a2d-8f28-032c33cdb505 created","level":"info"}
+{"message":"Bookmark with id 2d9effa0-1f9c-4906-8255-e1e86b7407f0 created","level":"info"}
+{"message":"Bookmark with id 3b87cba6-b84e-4d1f-9ae2-6aae14edd183 created","level":"info"}
+{"message":"Bookmark with id 7aff537e-b775-4245-9f2b-e813a807048a created","level":"info"}
+{"message":"Bookmark with id 6eb85925-f6d9-48c5-8bee-77667255612e created","level":"info"}
+{"message":"url must look like \"http://example.com\"","level":"error"}
+{"message":"url must be a valid url","level":"error"}
+{"message":"Bookmark with id b56b8e10-06b1-4e3c-ac2f-2b1b5b1f9c3c created","level":"info"}
