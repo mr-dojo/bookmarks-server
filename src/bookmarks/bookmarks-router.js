@@ -96,9 +96,7 @@ function handleFindBookmark(req, res) {
   const bookmark = bookmarks.filter(b => b.id === id)
   if(bookmark.length === 0) {
     logger.error(`Did not find bookmark with id: ${id}`)
-    return res
-      .status(404)
-      .send("Bookmark not found")
+    return res.status(404).send("Not found")
   };
   res
     .status(200)
@@ -107,7 +105,17 @@ function handleFindBookmark(req, res) {
 }
 
 function handleDeleteBookmark(req, res, next) {
-  res.send(204).end()
+  const { id } = req.params;
+  const bookmark = bookmarks.findIndex(u => u.id === id);
+
+  if(bookmark === -1) {
+    logger.error(`Bookmark with id: ${id} was not found`);
+    return res.status(404).send("Not found");
+  }
+
+  bookmarks.splice(bookmark);
+  
+  res.status(204).end();
 }
 
 module.exports = bookmarksRouter;
