@@ -92,7 +92,18 @@ function handleNewBookmark(req, res) {
 }
 
 function handleFindBookmark(req, res) {
-  res.send(200)
+  const { id } = req.params;
+  const bookmark = bookmarks.filter(b => b.id === id)
+  if(bookmark.length === 0) {
+    logger.error(`Did not find bookmark with id: ${id}`)
+    return res
+      .status(404)
+      .send("Bookmark not found")
+  };
+  res
+    .status(200)
+    .location(`http://localhost:8000/bookmarks/${id}`)
+    .json(bookmark)
 }
 
 function handleDeleteBookmark(req, res, next) {

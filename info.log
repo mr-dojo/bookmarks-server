@@ -39,3 +39,4 @@
 {"message":"url must look like \"http://example.com\"","level":"error"}
 {"message":"url must be a valid url","level":"error"}
 {"message":"Bookmark with id b56b8e10-06b1-4e3c-ac2f-2b1b5b1f9c3c created","level":"info"}
+{"message":"Did not find bookmark with id: 25","level":"error"}
