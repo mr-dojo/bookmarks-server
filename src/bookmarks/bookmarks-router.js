@@ -113,7 +113,7 @@ function handleDeleteBookmark(req, res, next) {
     return res.status(404).send("Not found");
   }
 
-  bookmarks.splice(bookmark);
+  bookmarks.splice(bookmark, 1);
   
   res.status(204).end();
 }
