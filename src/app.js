@@ -17,12 +17,6 @@ app.use(cors())
 app.use(validateBearerToken)
 app.use(bookmarksRouter)
 
-
-app.get('/', (req, res) => {
-  res.send(200, "Hello, bookmarks app!");
-})
-
-
 function validateBearerToken(req, res, next) {
   const apiToken = process.env.API_TOKEN
   const authToken = req.get('Authorization')
