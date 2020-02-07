@@ -112,7 +112,7 @@ function handleDeleteBookmark(req, res, next) {
     logger.error(`Bookmark with id: ${id} was not found`);
     return res.status(404).send("Not found");
   }
-
+  logger.info(`Bookmark with id: ${id} deleted`)
   bookmarks.splice(bookmark, 1);
   
   res.status(204).end();
