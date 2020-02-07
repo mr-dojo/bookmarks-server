@@ -7,6 +7,12 @@ const bookmarksRouter = express.Router();
 const bodyParcer = express.json();
 
 bookmarksRouter
+  .route('/')
+  .get((req, res) => {
+    res.send(200, "Hello, bookmarks app!");
+  })
+
+bookmarksRouter
   .route('/bookmarks')
   .get(handleAllBookmarks)
   .post(bodyParcer, handleNewBookmark)
