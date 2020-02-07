@@ -1,7 +1,7 @@
 const express = require('express');
 const uuid = require('uuid/v4')
 const logger = require('../logger')
-const bookmarks = require('../store')
+const BookmarksService = require('../bookmarks-service')
 
 const bookmarksRouter = express.Router();
 const bodyParcer = express.json();
@@ -22,10 +22,13 @@ bookmarksRouter
   .get(handleFindBookmark)
   .delete(bodyParcer, handleDeleteBookmark)
 
-function handleAllBookmarks(req, res) {
-  res
-    .status(200)
-    .json(bookmarks)
+function handleAllBookmarks(req, res, next) {
+  const knexInstance = req.app.get('db')
+  BookmarksService.getAllBookmarks(knexInstance)
+    .then(bookmarks => {
+      res.json(bookmarks)
+    })
+    .catch(next)
 }
 
 function handleNewBookmark(req, res) {
