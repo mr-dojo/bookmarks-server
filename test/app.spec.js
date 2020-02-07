@@ -4,6 +4,6 @@ describe('App', () => {
   it('GET / respondes with 200 and "Hello, world"', () => {
     return supertest(app)
       .get('/')
-      .expect(200, "Hello, boilerplate!")
+      .expect(200, "Hello, bookmarks app!")
   })
 })
