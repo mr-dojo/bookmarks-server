@@ -4,7 +4,7 @@ This is an API for storing bookmarks
 
 ## Set up
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
+1. Clone this repository to your local machine `git clone https://github.com/mr-dojo/bookmarks-server.git`
 2. `cd` into the cloned repository 
 4. Install the node dependencies `npm install`
 
