@@ -1,10 +1,19 @@
-const express = require('express');
+const express = require('express')
+const xss = require('xss')
 const logger = require('../logger')
 const bookmarks = require('../store')
 const BookmarksService = require('./bookmarks-service')
 
 const bookmarksRouter = express.Router();
 const bodyParcer = express.json();
+
+const serializeBookmark = bookmark => ({
+  id: bookmark.id,
+  url: bookmark.url,
+  title: xss(bookmark.title),
+  description: xss(bookmark.description),
+  rating: bookmark.rating
+})
 
 bookmarksRouter
   .route('/')
@@ -25,7 +34,7 @@ bookmarksRouter
 function handleAllBookmarks(req, res, next) {
   BookmarksService.getAllBookmarks(req.app.get('db'))
     .then(bookmarks => {
-      res.json(bookmarks)
+      res.json(bookmarks.map(serializeBookmark))
     })
     .catch(next)
 }
@@ -97,7 +106,7 @@ function handleNewBookmark(req, res, next) {
     res
       .status(201)
       .location(`http://localhost:8000/bookmarks/${bookmark.id}`)
-      .json(bookmark)
+      .json(serializeBookmark(bookmark))
   })
   .catch(next)
 
@@ -116,7 +125,7 @@ function handleFindBookmark(req, res, next) {
       res
         .status(200)
         .location(`http://localhost:8000/bookmarks/${id}`)
-        .json(bookmark)
+        .json(serializeBookmark(bookmark))
       })
       .catch(next)
 }
