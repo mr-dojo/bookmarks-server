@@ -1,5 +1,4 @@
 const express = require('express');
-const uuid = require('uuid/v4')
 const logger = require('../logger')
 const bookmarks = require('../store')
 const BookmarksService = require('./bookmarks-service')
@@ -31,12 +30,10 @@ function handleAllBookmarks(req, res, next) {
     .catch(next)
 }
 
-function handleNewBookmark(req, res) {
+function handleNewBookmark(req, res, next) {
   const { title, rating, description="", url } = req.body;
-  const id = uuid();
   const urlRegex = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
   const newBookmark = {
-    id: id,
     title,
     rating,
     description,
@@ -91,13 +88,19 @@ function handleNewBookmark(req, res) {
       .send('Invalid data');
   }
 
-  bookmarks.push(newBookmark);
-  logger.info(`Bookmark with id ${id} created`)
-  console.log(bookmarks)
-  res
-    .status(201)
-    .location(`http://localhost:8000/bookmark/${id}`)
-    .json(newBookmark);
+  BookmarksService.insertBookmark(
+    req.app.get('db'),
+    newBookmark
+  )
+  .then(bookmark => {
+    logger.info(`Bookmark with id ${bookmark.id} created`)
+    res
+      .status(201)
+      .location(`http://localhost:8000/bookmarks/${bookmark.id}`)
+      .json(bookmark)
+  })
+  .catch(next)
+
 }
 
 function handleFindBookmark(req, res, next) {

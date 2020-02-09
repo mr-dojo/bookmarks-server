@@ -85,6 +85,36 @@ describe('Bookmarks Endpoints', function() {
           .set(auth)
           .expect(200, expectedBookmark)
       })
-    })  
+    })
+  })
+  describe(`POST /bookmarks`, () => {
+    it(`creates a bookmark responding with a 201 and the new bookmark`, function() {
+      this.retries(3)
+      const newBookmark =     {
+        url: "https://skullcandy.com",
+        title: 'New POST bookmark!',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non.Adipisci, pariatur.Molestiae, libero esse hic adipisci autem neque ?',
+        rating: 1
+      }
+      return supertest(app)
+        .post('/bookmarks')
+        .set(auth)
+        .send(newBookmark)
+        .expect(201)
+        .expect(res => {
+          expect(res.body.url).to.eql(newBookmark.url)
+          expect(res.body.title).to.eql(newBookmark.title)
+          expect(res.body.description).to.eql(newBookmark.description)
+          expect(res.body.rating).to.eql(newBookmark.rating)
+          expect(res.body).to.have.property('id')
+          expect(res.headers.location).to.eql(`http://localhost:8000/bookmarks/${res.body.id}`)
+        })
+        .then(postRes =>
+          supertest(app)
+            .get(`/bookmarks/${postRes.body.id}`)
+            .set(auth)
+            .expect(postRes.body)
+          )
+    })
   })
 })
