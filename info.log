@@ -224,3 +224,14 @@
 {"message":"title is required in request body","level":"error"}
 {"message":"rating is required in request body","level":"error"}
 {"message":"url is required in request body","level":"error"}
+{"message":"Unauthorized request to path: /Bookmarks","level":"error"}
+{"message":"Did not find bookmark with id: 1234","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required in request body","level":"error"}
+{"message":"rating is required in request body","level":"error"}
+{"message":"url is required in request body","level":"error"}
+{"message":"Did not find bookmark with id: 1234","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required in request body","level":"error"}
+{"message":"rating is required in request body","level":"error"}
+{"message":"url is required in request body","level":"error"}
