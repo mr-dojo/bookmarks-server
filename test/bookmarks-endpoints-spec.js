@@ -116,5 +116,24 @@ describe('Bookmarks Endpoints', function() {
             .expect(postRes.body)
           )
     })
+    const requiredFields = ['title', 'rating', 'url']
+ 
+    requiredFields.forEach(field => {
+      const newBookmark = {
+        title: 'Test new Bookmark',
+        rating: 3,
+        url: 'http//www.acer.com'
+      }
+ 
+      it(`responds with 400 and 'Invalid data'`, () => {
+        delete newBookmark[field]
+ 
+        return supertest(app)
+          .post('/bookmarks')
+          .set(auth)
+          .send(newBookmark)
+          .expect(400, 'Invalid data')
+      })
+    })
   })
 })
