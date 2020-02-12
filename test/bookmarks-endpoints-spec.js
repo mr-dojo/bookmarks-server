@@ -108,6 +108,7 @@ describe('Bookmarks Endpoints', function() {
       })
     })
   })
+
   describe(`POST /bookmarks`, () => {
     it(`creates a bookmark responding with a 201 and the new bookmark`, function() {
       this.retries(3)
@@ -154,6 +155,40 @@ describe('Bookmarks Endpoints', function() {
           .set(auth)
           .send(newBookmark)
           .expect(400, 'Invalid data')
+      })
+    })
+  })
+
+  describe(`DELETE /bookmarks/:bookmark_id`, () => {
+    context(`Given no bookmarks`, () => {
+      it(`responds with 404`, () => {
+        const bookmarkId = 12345
+        return supertest(app)
+          .delete(`/bookmarks/${bookmarkId}`)
+          .set(auth)
+          .expect(404, { error: {message: `Bookmark with id:${bookmarkId} doesn't exist`}})
+      })
+    })
+    context(`Given there are bookmarks in the database`, () => {
+      const testBookmarks = makeBookmarksArray()
+
+      beforeEach('insert articles', () => {
+        return db
+          .into('bookmarks')
+          .insert(testBookmarks)
+      })
+
+      it(`responds with 204 and removes the bookmark`, () => {
+        const idToRemove = 2
+        const expectedBookmark = testBookmarks.filter(bookmark => bookmark.id !== idToRemove)
+        return supertest(app)
+          .delete(`/bookmarks/${idToRemove}`)
+          .set(auth)
+          .then(res => 
+            supertest(app)
+              .get(`/bookmarks`)
+              .expect(expectedBookmark)
+          )
       })
     })
   })
