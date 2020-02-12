@@ -166,7 +166,7 @@ describe('Bookmarks Endpoints', function() {
         return supertest(app)
           .delete(`/bookmarks/${bookmarkId}`)
           .set(auth)
-          .expect(404, { error: {message: `Bookmark with id:${bookmarkId} doesn't exist`}})
+          .expect(404, { error: {message: `Bookmark not found`}})
       })
     })
     context(`Given there are bookmarks in the database`, () => {
@@ -184,9 +184,11 @@ describe('Bookmarks Endpoints', function() {
         return supertest(app)
           .delete(`/bookmarks/${idToRemove}`)
           .set(auth)
+          .expect(204)
           .then(res => 
             supertest(app)
               .get(`/bookmarks`)
+              .set(auth)
               .expect(expectedBookmark)
           )
       })

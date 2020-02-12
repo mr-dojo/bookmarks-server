@@ -132,16 +132,26 @@ function handleFindBookmark(req, res, next) {
 
 function handleDeleteBookmark(req, res, next) {
   const { id } = req.params;
-  const bookmark = bookmarks.findIndex(u => u.id === id);
-
-  if(bookmark === -1) {
-    logger.error(`Bookmark with id: ${id} was not found`);
-    return res.status(404).send("Not found");
-  }
-  logger.info(`Bookmark with id: ${id} deleted`)
-  bookmarks.splice(bookmark, 1);
-  
-  res.status(204).end();
+  // const bookmarkExists = true
+  BookmarksService.getById(req.app.get('db'), id)
+    .then(bookmark => {
+      if(!bookmark) {
+        // bookmarkExists = false ___make .deleteBookmark() conditional___
+        logger.error(`Bookmark with id: ${id} was not found`);
+        return res.status(404).json({
+          error: {message: `Bookmark not found`}
+        })
+      }
+    })
+    .catch(next)
+  // if(bookmarkExists) {
+    BookmarksService.deleteBookmark(req.app.get('db'), id)
+      .then(numRowsAffected => {
+        logger.info(`Bookmark with id: ${id} deleted`)
+        res.status(204).end()
+      })
+      .catch(next)
+  // }
 }
 
 module.exports = bookmarksRouter;
