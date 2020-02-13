@@ -196,13 +196,20 @@ describe('Bookmarks Endpoints', function() {
   })
 
   describe(`PATCH /api/bookmarks/:article_id`, () => {
+    const updateBookmark = {
+      url: "https://updatedurl.com",
+      title: 'updated title!',
+      description: 'UPDATED DESCRIPTION',
+      rating: 5
+    }
     context(`Given no bookmarks`, () => {
       it(`responds with 404`, () => {
         const bookmarkId = 12345
         return supertest(app)
           .patch(`/api/bookmarks/${bookmarkId}`)
           .set(auth)
-          .expect(404, { error: { message: `Bookmark doesn't exist` } })
+          .send(updateBookmark)
+          .expect(404, { error: { message: `Bookmark not found` } })
       })
     })
     context(`Given there are bookmarks in the database`, () => {
@@ -216,12 +223,6 @@ describe('Bookmarks Endpoints', function() {
 
       it('responds 204 and updates the bookmark', () => {
         const idToUpdate = 2
-        const updateBookmark = {
-          url: "https://updatedurl.com",
-          title: 'updated title!',
-          description: 'UPDATED DESCRIPTION',
-          rating: 5
-        }
         const expectedBookmark = {
           ...testBookmarks[idToUpdate -1],
           ...updateBookmark,
