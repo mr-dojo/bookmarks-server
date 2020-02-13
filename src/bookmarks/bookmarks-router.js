@@ -173,7 +173,7 @@ function handleUpdateBookmark(req, res, next) {
   BookmarksService.getById(req.app.get('db'), id)
     .then(bookmark => {
       if(!bookmark) {
-        // bookmarkExists = false ___make .updateBookmark() conditional___
+        //___make .updateBookmark() conditional___
         logger.error(`Bookmark with id: ${id} was not found`);
         return res.status(404).json({
           error: {message: `Bookmark not found`}
