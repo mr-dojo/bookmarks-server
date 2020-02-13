@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const xss = require('xss')
 const logger = require('../logger')
 const bookmarks = require('../store')
@@ -105,7 +106,7 @@ function handleNewBookmark(req, res, next) {
     logger.info(`Bookmark with id ${bookmark.id} created`)
     res
       .status(201)
-      .location(`http://localhost:8000/bookmarks/${bookmark.id}`)
+      .location(path.posix.join(req.originalUrl, `/${bookmark.id}`))
       .json(serializeBookmark(bookmark))
   })
   .catch(next)
