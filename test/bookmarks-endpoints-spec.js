@@ -199,8 +199,6 @@ describe('Bookmarks Endpoints', function() {
     const updateBookmark = {
       url: "https://updatedurl.com",
       title: 'updated title!',
-      description: 'UPDATED DESCRIPTION',
-      rating: 5
     }
     context(`Given no bookmarks`, () => {
       it(`responds with 404`, () => {
@@ -232,6 +230,23 @@ describe('Bookmarks Endpoints', function() {
           .set(auth)
           .send(updateBookmark)
           .expect(204)
+          .then(res => {
+            expect(expectedBookmark)
+          })
+      })
+
+      it('responds 400 when no valid values are supplied in req body', () => {
+        const idToUpdate = 2
+        return supertest(app)
+          .patch(`/api/bookmarks/${idToUpdate}`)
+          .set(auth)
+          .send({ fakefield: "total bs" })
+          .expect(400)
+          .then(req => {
+            error: {
+              message: `Request body must contain either "url", "title", or "description", or "rating"`
+            }
+          })
       })
     })
   })
